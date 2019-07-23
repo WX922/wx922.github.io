@@ -6,10 +6,22 @@
     <description>Recent content in Posts on 遗忘的角落</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 08 Jul 2019 22:07:05 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jul 2019 21:21:26 +0800</lastBuildDate>
     
 	<atom:link href="https://wx922.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>远程ADB调试的几种方式</title>
+      <link>https://wx922.github.io/post/%E8%BF%9C%E7%A8%8Badb%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Tue, 23 Jul 2019 21:21:26 +0800</pubDate>
+      
+      <guid>https://wx922.github.io/post/%E8%BF%9C%E7%A8%8Badb%E8%B0%83%E8%AF%95/</guid>
+      <description> 经过在网上搜寻，发下以下方式：
+ 先是使用usb线连接电脑跟安卓设备，打开电脑的cmd窗口，输入命令：adb tcpip 5555 ；该条命令是设置网络adb监听的端口，5555是默认，也可以设置成其它的。 该种方法是在系统有root权限下才能使用，依次输入命令：adb shell su -c setprop service.adb.tcp.port 5555（貌似不管用） 该种方法是在手机系统有root权限下才能使用，使用文件管理器按照以下路径打开文件：/system/build.prop，在该文件的最后添加以下内容：service.adb.tcp.port=5555  方法一、二在安卓设备重启后会失效，需重新设置才行，方法三在重启后依然有效，但是该两种方法需在系统有root权限下才能做修改，一、二需先使用usb模式连接电脑设置，三不需要连接电脑
+连接与断开  在设置好端口后就可输入命令连接：adb connect 192.168.1.1:5555，其中192.168.1.1是安卓设备的ip地址，如果设置的端口号是默认的5555，后面的：5555可以不用输入 断开连接的命令：adb disconnect 192.168.1.1或者直接adb kill-server 切换成usb模式：adb usb  最后 附上我自己写的小脚本，在同一局域网连接usb线后执行脚本就可以直接连上远程。
+ip=$(adb shell ifconfig | grep &#39;192.168&#39; | sed &#39;s/^.*addr://g&#39; | sed &#39;s/Bcast.*$//g&#39;) echo &amp;quot;device&#39;s ip is $ip &amp;quot; adb tcpip 5555 adb connect ${ip}  </description>
+    </item>
     
     <item>
       <title>Windows常用软件列表</title>
